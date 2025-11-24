@@ -47,6 +47,7 @@ CREATE TABLE users (
     status user_status NOT NULL
 );
 
+
 CREATE TABLE vehicle (
     vehicle_id SERIAL PRIMARY KEY,
     brand VARCHAR(100) NOT NULL,
@@ -67,4 +68,16 @@ CREATE TABLE booking (
     start_time TIMESTAMP NOT NULL,
     end_time TIMESTAMP NOT NULL,
     status booking_status NOT NULL
+);
+
+CREATE TABLE trip (
+    trip_id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL REFERENCES users(user_id),
+    vehicle_id INT NOT NULL REFERENCES vehicle(vehicle_id),
+    start_time TIMESTAMP NOT NULL,
+    end_time TIMESTAMP,
+    start_location INT NOT NULL REFERENCES coordinates(coordinates_id),
+    end_location INT REFERENCES coordinates(coordinates_id),
+    distance NUMERIC(10,2) NOT NULL DEFAULT 0 CHECK (distance >= 0),
+    cost NUMERIC(10,2) NOT NULL DEFAULT 0 CHECK (cost >= 0)
 );
