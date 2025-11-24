@@ -12,3 +12,13 @@ GROUP BY booking_price;
 
 SELECT MIN(price_per_minute) AS min_tariff_price
 FROM tariff;
+
+
+SELECT status, COUNT(*) AS payment_count
+FROM payment
+GROUP BY status;
+
+
+SELECT vehicle_id, MAX(distance) AS max_trip_distance
+FROM trip
+GROUP BY vehicle_id;
