@@ -31,3 +31,19 @@ SELECT
    m.comment
 FROM vehicle v
 RIGHT JOIN maintenance m ON v.vehicle_id = m.vehicle_id;
+
+SELECT
+   v.brand,
+   v.model,
+   t.name AS tariff_name,
+   t.price_per_minute
+FROM vehicle v
+JOIN tariff t ON v.tariff_id = t.tariff_id;
+
+SELECT
+   t.trip_id,
+   t.distance,
+   p.amount,
+   p.method
+FROM trip t
+JOIN payment p ON t.trip_id = p.trip_id;
