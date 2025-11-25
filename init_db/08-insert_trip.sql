@@ -1,7 +1,6 @@
 INSERT INTO trip (user_id, vehicle_id, start_time, end_time, start_location, end_location, distance, cost) VALUES
-(1, 1, NOW() - INTERVAL '1 hour', NOW(), 1, 2, 5.4, 27.00),
-(2, 2, NOW() - INTERVAL '40 minutes', NOW() - INTERVAL '10 minutes', 2, 3, 7.1, 53.25),
-(3, 3, NOW() - INTERVAL '3 hours', NOW() - INTERVAL '2 hours', 3, 4, 10.2, 102.00),
-(4, 5, NOW() - INTERVAL '50 minutes', NOW(), 5, 6, 3.3, 19.80),
-(5, 6, NOW() - INTERVAL '20 minutes', NOW(), 6, 7, 2.0, 14.00),
-(6, 1, NOW() - INTERVAL '2 hours', NOW() - INTERVAL '1 hour', 1, 3, 6.0, 36.00);
+(1, 1, '2025-11-25 09:05:00', '2025-11-25 09:45:00', 1, 2, 12.5, 31.25),
+(2, 2, '2025-11-25 11:10:00', '2025-11-25 12:00:00', 2, 3, 15.0, 75.00),
+(1, 4, '2025-11-26 14:10:00', '2025-11-26 14:50:00', 4, 1, 10.0, 25.00),
+(3, 5, '2025-11-26 16:10:00', '2025-11-26 17:10:00', 5, 6, 20.0, 60.00),
+(4, 6, '2025-11-27 08:10:00', '2025-11-27 08:50:00', 6, 4, 8.0, 20.00);

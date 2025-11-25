@@ -1,4 +1,4 @@
-CREATE TYPE user_status AS ENUM ('active', 'blocked');
+CREATE TYPE user_status AS ENUM ('inactive', 'active', 'blocked');
 
 CREATE TYPE vehicle_type AS ENUM ('electric','petrol','hybrid');
 
@@ -28,8 +28,6 @@ CREATE TABLE tariff (
     name VARCHAR(100) NOT NULL UNIQUE,
     price_per_minute NUMERIC(10,2) NOT NULL CHECK (price_per_minute >= 0),
     included_mileage INT NOT NULL CHECK (included_mileage >= 0),
-    booking_price NUMERIC(10,2) NOT NULL CHECK (booking_price >= 0),
-    booking_duration_minutes INT NOT NULL CHECK (booking_duration_minutes > 0),
     deposit NUMERIC(10,2) NOT NULL CHECK (deposit >= 0),
     insurance NUMERIC(10,2) NOT NULL CHECK (insurance >= 0)
 );
@@ -43,7 +41,7 @@ CREATE TABLE users (
     phone VARCHAR(20) NOT NULL UNIQUE CHECK (phone ~ '^\+380[0-9]{9}$'),
     passport_data VARCHAR(255) NOT NULL UNIQUE CHECK (passport_data ~ '^[A-Z]{2}[0-9]{6}$'),
     driver_license VARCHAR(255) NOT NULL UNIQUE CHECK (driver_license ~ '^[0-9]{8}$'),
-    registration_date TIMESTAMP NOT NULL,
+    registration_date TIMESTAMP NOT NULL DEFAULT now(),
     status user_status NOT NULL
 );
 
@@ -67,7 +65,8 @@ CREATE TABLE booking (
     vehicle_id INT NOT NULL REFERENCES vehicle(vehicle_id),
     start_time TIMESTAMP NOT NULL,
     end_time TIMESTAMP NOT NULL,
-    status booking_status NOT NULL
+    status booking_status NOT NULL,
+    CONSTRAINT chk_booking_time CHECK (start_time < end_time)
 );
 
 CREATE TABLE trip (
@@ -108,5 +107,5 @@ CREATE TABLE penalty (
     trip_id INT NOT NULL REFERENCES trip(trip_id),
     type VARCHAR(150) NOT NULL,
     amount NUMERIC(10,2) NOT NULL CHECK (amount >= 0),
-    date TIMESTAMP NOT NULL
+    date TIMESTAMP NOT NULL DEFAULT now()
 );

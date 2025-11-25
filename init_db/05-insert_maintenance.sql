@@ -1,6 +1,4 @@
 INSERT INTO maintenance (vehicle_id, type, date, mileage, comment, status) VALUES
-(4, 'Engine Check', NOW() - INTERVAL '7 days', 120000, 'Oil change', 'done'),
-(2, 'Brake Check', NOW() - INTERVAL '2 days', 90000, 'Pads replaced', 'done'),
-(3, 'Battery Inspection', NOW() - INTERVAL '14 days', 50000, 'OK', 'planned'),
-(6, 'Full Inspection', NOW() - INTERVAL '1 month', 40000, 'Scheduled', 'planned'),
-(1, 'Tire Change', NOW() - INTERVAL '20 days', 70000, 'Front tires replaced', 'done');
+(3, 'Battery check', '2025-11-24 10:00:00', 15000, 'Routine check', 'planned'),
+(2, 'Oil change', '2025-11-20 12:00:00', 20000, 'Changed engine oil', 'done'),
+(1, 'Tire rotation', '2025-11-23 15:00:00', 12000, 'Rotated tires', 'done');
