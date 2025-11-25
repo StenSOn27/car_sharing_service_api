@@ -84,7 +84,6 @@ CREATE TABLE trip (
 CREATE TABLE payment (
     payment_id SERIAL PRIMARY KEY,
     trip_id INT REFERENCES trip(trip_id),
-    booking_id INT REFERENCES booking(booking_id),
     user_id INT NOT NULL REFERENCES users(user_id),
     amount NUMERIC(10,2) NOT NULL CHECK (amount >= 0),
     method payment_method NOT NULL,
