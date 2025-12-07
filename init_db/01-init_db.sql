@@ -45,11 +45,15 @@ CREATE TABLE users (
     status user_status NOT NULL
 );
 
+CREATE TABLE car_models (
+    model_id SERIAL PRIMARY KEY,
+    model_name VARCHAR(100) NOT NULL,
+    brand VARCHAR(100) NOT NULL,
+);
 
 CREATE TABLE vehicle (
     vehicle_id SERIAL PRIMARY KEY,
-    brand VARCHAR(100) NOT NULL,
-    model VARCHAR(100) NOT NULL,
+    model_id INT REFERENCES car_models(model_id),
     plate_number VARCHAR(8) NOT NULL UNIQUE CHECK (plate_number ~ '^[A-Z]{2}[0-9]{4}[A-Z]{2}$'),
     vin VARCHAR(17) NOT NULL UNIQUE CHECK (vin ~ '^[A-HJ-NPR-Z0-9]{17}$'),
     type vehicle_type NOT NULL,
