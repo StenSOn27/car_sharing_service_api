@@ -48,7 +48,7 @@ CREATE TABLE users (
 CREATE TABLE car_models (
     model_id SERIAL PRIMARY KEY,
     model_name VARCHAR(100) NOT NULL,
-    brand VARCHAR(100) NOT NULL,
+    brand VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE vehicle (
