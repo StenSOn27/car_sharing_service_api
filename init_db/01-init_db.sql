@@ -48,7 +48,8 @@ CREATE TABLE users (
 CREATE TABLE car_models (
     model_id SERIAL PRIMARY KEY,
     model_name VARCHAR(100) NOT NULL,
-    brand VARCHAR(100) NOT NULL
+    brand VARCHAR(100) NOT NULL,
+    type vehicle_type NOT NULL
 );
 
 CREATE TABLE vehicle (
@@ -56,7 +57,6 @@ CREATE TABLE vehicle (
     model_id INT REFERENCES car_models(model_id),
     plate_number VARCHAR(8) NOT NULL UNIQUE CHECK (plate_number ~ '^[A-Z]{2}[0-9]{4}[A-Z]{2}$'),
     vin VARCHAR(17) NOT NULL UNIQUE CHECK (vin ~ '^[A-HJ-NPR-Z0-9]{17}$'),
-    type vehicle_type NOT NULL,
     status vehicle_status NOT NULL,
     location INT NOT NULL REFERENCES coordinates(coordinates_id),
     fuel_level INT CHECK (fuel_level BETWEEN 0 AND 100),
@@ -75,8 +75,7 @@ CREATE TABLE booking (
 
 CREATE TABLE trip (
     trip_id SERIAL PRIMARY KEY,
-    user_id INT NOT NULL REFERENCES users(user_id),
-    vehicle_id INT NOT NULL REFERENCES vehicle(vehicle_id),
+    booking_id INT NOT NULL REFERENCES booking(booking_id),
     start_time TIMESTAMP NOT NULL,
     end_time TIMESTAMP,
     start_location INT NOT NULL REFERENCES coordinates(coordinates_id),
@@ -88,7 +87,6 @@ CREATE TABLE trip (
 CREATE TABLE payment (
     payment_id SERIAL PRIMARY KEY,
     trip_id INT REFERENCES trip(trip_id),
-    user_id INT NOT NULL REFERENCES users(user_id),
     amount NUMERIC(10,2) NOT NULL CHECK (amount >= 0),
     method payment_method NOT NULL,
     status payment_status NOT NULL
@@ -106,7 +104,6 @@ CREATE TABLE maintenance (
 
 CREATE TABLE penalty (
     penalty_id SERIAL PRIMARY KEY,
-    user_id INT NOT NULL REFERENCES users(user_id),
     trip_id INT NOT NULL REFERENCES trip(trip_id),
     type VARCHAR(150) NOT NULL,
     amount NUMERIC(10,2) NOT NULL CHECK (amount >= 0),
